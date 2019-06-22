@@ -1,6 +1,6 @@
 FROM alpine:3.10 as ext-mongodb
 
-RUN apk --no-cache add php7 php7-dev php7-pear php7-openssl g++ make
+RUN apk --no-cache add php7 php7-dev php7-pear php7-openssl openssl-dev g++ make
 RUN pecl install mongodb
 
 
@@ -13,3 +13,5 @@ RUN apk --no-cache add php7 php7-fpm php7-mysqli php7-json php7-openssl php7-cur
 
 COPY --from=ext-mongodb /usr/lib/php7/modules/mongodb.so /usr/lib/php7/modules/mongodb.so
 RUN echo 'extension=mongodb.so' > /etc/php7/conf.d/mongodb.ini
+
+CMD ["php-fpm7", "-F"]

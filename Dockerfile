@@ -11,6 +11,8 @@ RUN apk --no-cache add php7 php7-fpm php7-mysqli php7-json php7-openssl php7-cur
     php7-mbstring php7-gd php7-bcmath php7-tokenizer php7-fileinfo php7-xmlwriter \
     php7-opcache php7-mysqlnd php7-pdo php7-pdo_mysql php7-pecl-redis
 
+COPY www.conf /etc/php7/php-fpm.d/www.conf
+
 COPY --from=ext-mongodb /usr/lib/php7/modules/mongodb.so /usr/lib/php7/modules/mongodb.so
 RUN echo 'extension=mongodb.so' > /etc/php7/conf.d/mongodb.ini
 
